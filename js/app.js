@@ -134,6 +134,20 @@ const game = {
 		computerPoints = 0;
 		// maybe calling deal() will eventually be a button?
 		return this.deal();
+	},
+	shuffleCards(){
+		// found this on the internet. it totally works tho.
+			let deck = this.cardsInDeck.deck;
+  			let i = 0;
+    		let j = 0;
+    		let temp = null;
+
+  		for (let i = deck.length - 1; i > 0; i -= 1) {
+   			j = Math.floor(Math.random() * (i + 1));
+    		temp = deck[i];
+    		deck[i] = deck[j];
+    		deck[j] = temp;
+  		}
 	}
 }
 console.log(game.cardsInDeck.deck);
