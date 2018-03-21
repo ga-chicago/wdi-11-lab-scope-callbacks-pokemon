@@ -13,6 +13,7 @@ class Player {
 		this.cardsPlayed = [];
 	}
 	dealCards(){
+		if (pokeCards.length >= 3){
 		//Deal 3 random cards
 		for(let i = 0; i < 3; i++){
 			let card = pokeCards[Math.floor(Math.random()*pokeCards.length)];
@@ -27,6 +28,9 @@ class Player {
 			this.cardsDealt.push(card);
 			cardsPlayed.push(card);
 		} console.log(this.cardsDealt);
+	} else {
+		console.log("Sorry Charlie! You're out of cards!");
+		}
 	}
 }
 
