@@ -7,14 +7,19 @@ console.log(tagMap[0]["Language"])
 
 // 2. Filter out all objects where the Language property does not equal to en (stands for English)
 
-function filterLanguage (query) {
-	return tagMap.filter(filterLanguage(query)
-}
+// function filterLanguage (language) {
 
-let filteredList = tagMap.filter(filterLanguage('en'));
+// 	return language === tag.Map.length tagMap[i][Language]
 
-for(let i = 0; i < filteredList.length; i++){
-			console.log(filteredList[i]);	
+// 	tagMap[i.filter(filterLanguage(query)
+// }
+
+let filteredList = [];
+
+for(let i = 0; i < tagMap.length; i++){
+	if(tagMap[i]["Language"] === 'en'){
+		console.log(filteredList.push(tagMap[i]));	
+	}
 }
 
 // 3. Loop over the filtered array and...
