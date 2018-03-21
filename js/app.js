@@ -34,11 +34,12 @@ const game = {
 		this.currentCardsNumber -= 2;
 		return(playHand(playerCard, computerCard));
 	},
-	playHand (){
+	playHand (playerCard){
 		if (this.cardsInDeck.deck.length === 0) {
 			return (this.gameOver());
 		}
-		let playerCard = this.playerCards.cards[0];
+		// made it random at first to test it out
+		// let playerCard = this.playerCards.cards[0];
 		let computerCard = this.computerCards.cards[0];
 		console.log(this.playerCards);
 		console.log(this.computerCards);
@@ -136,7 +137,7 @@ const game = {
 		return this.deal();
 	},
 	shuffleCards(){
-		// found this on the internet. it totally works tho.
+		// found a version of this on the internet. it totally works.
 			let deck = this.cardsInDeck.deck;
   			let i = 0;
     		let j = 0;
@@ -149,5 +150,22 @@ const game = {
     		deck[j] = temp;
   		}
 	}
-}
+};
 console.log(game.cardsInDeck.deck);
+
+const player = {
+	playerPoints: game.playerScore,
+	playerRoundsWon: game.playerRoundsWon,
+	cardsPrevUsed: [],
+	displayCurrentHand () {
+		return game.PlayerCards.cards
+	},
+	playCard(playerCard) {
+		cardsPrevUsed.push(playerCard);
+		// to play a card, put it in the game method playHand
+		return (game.playHand(playerCard));
+	},
+	shuffleDeck() {
+		return game.shuffleCards();
+	}
+};
