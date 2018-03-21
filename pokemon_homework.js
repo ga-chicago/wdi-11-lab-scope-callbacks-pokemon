@@ -87,6 +87,8 @@ class Game {
 			this.player2.cardsDealt = [];
 			//add to the rounds
 			this.gameRounds += 1;
+			marie.dealCards();
+			computer.dealCards();
 	}	
 
 }
