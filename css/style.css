@@ -1,0 +1,80 @@
+body {
+text-align: center;
+margin: 0;
+}
+header {
+  background-color: #260188;
+  color: #F0B806;
+  padding: 30px 20px;
+}
+nav {
+  background-color: #00a6b3;
+  color: #ffffff;
+  padding: 20px 0;
+}
+main {
+  width: 850px;
+  margin: 35px auto;
+}
+h1 {
+  font-family: 'PT Sans', sans-serif;
+  background-color: #260188;
+  color: #F0B806;
+  letter-spacing: 1px;
+  font-weight: 900;
+  font-size: 45px;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 30px 20px;
+}
+h2 {
+  font-family: 'PT Sans', sans-serif;
+  color: #0d2c40;
+  letter-spacing: 1px;
+  font-weight: 600;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+a:hover {
+  border-color: white;
+}
+p {
+  font-family: "Droid Serif", serif;
+  line-height: 26px;
+  font-size: 18px;
+}
+
+img {
+  margin: 40px 8px 0 8px;
+}
+
+footer {
+ text-transform: uppercase;
+ padding: 0 20px;
+ background-color: #260188;
+ color: #F0B806;
+ font-size: 14px;
+ letter-spacing: .08em;
+ font-weight: 500;
+}
+
+.copyright {
+font-family: 'PT Sans', sans-serif;
+float:left;
+}
+.message {
+font-family: 'PT Sans', sans-serif;
+float:right;
+}
+.name {
+color: lightblue;
+font-weight: 700;
+}
+.clearfix:after {
+visibility: hidden;
+display: block;
+content: " ";
+clear: both;
+height: 0;
+font-size: 0;
+}
