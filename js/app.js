@@ -1,13 +1,13 @@
 const game = {
-	// original object of cards to draw from
-	cardsLibrary: cards,
+	// original object of cards to reference
+	cardsLibrary: {cards},
 	cardsUsed: {
 	// use this array to track all the cards that have been used
 		cards: []
 	},
 	cardsInDeck: {
 		// deck starts from source, then depletes every hand
-		deck: [],
+		deck: cards,
 		// a number value that tracks the amount of cards left
 		currentCardsNumber: cards.length
 	},
@@ -34,30 +34,46 @@ const game = {
 		this.currentCardsNumber -= 2;
 		return(playHand(playerCard, computerCard));
 	},
-	playHand (playerCard, computerCard){
-		let cardsRemaining = this.playerCards.card;
+	playHand (){
+		if (this.cardsInDeck.deck.length === 0) {
+			return (this.gameOver());
+		}
+		let playerCard = this.playerCards.cards[0];
+		let computerCard = this.computerCards.cards[0];
+		console.log(this.playerCards);
+		console.log(this.computerCards);
+		console.log(this.cardsInDeck.deck);
 		// playHand needs to be called somewhere, as a button maybe?
+		// set condition in case there are 0 cards left
+		if (this.playerCards.cards.length === 0 || this.computerCards.cards.length === 0) {
+			return(this.roundOver());
+		}
 		// set conditions for each player to score
 		if (playerCard.damage > computerCard.damage){
 			this.playerScore += 1;
 			this.playerRoundPoints +=1;
 			// remove cards from player's hands
-			// if (cardsRemaining)
+			this.playerCards.cards.shift();
+			this.computerCards.cards.shift();
 			return (this.playerName + " has earned 1 point! " + this.playerName + " has a total score of " + this.playerScore);
 		} else if (computerCard.damage > playerCard.damage) {
 			this.computerScore += 1;
 			this.computerRoundPoints += 1;
+			this.playerCards.cards.shift();
+			this.computerCards.cards.shift();
 			// remove cards from player's hands
 			return (this.computerName + " has earned 1 point! " + this.computerName + " has a total score of " + this.computerScore);
 		} else {
 			// if neither player scores
+			this.playerCards.cards.shift();
+			this.computerCards.cards.shift();
 			return ("Tie. No points awarded.");
 		}
 		// if cards in hand are 0, call endRound function?
 	},
 	gameOver (){
 		// if 0 cards left, game over.
-		if (this.cardsRemaining === 0) {
+		if (this.cardsInDeck.currentCardsNumber === 0) {
 			// game over
 			// display both player's total points and rounds won
 			if (this.playerScore > this.computerScore) {
@@ -71,11 +87,6 @@ const game = {
 	},
 	deal(){
 		let deck = this.cardsInDeck.deck;
-
-		if (this.cardsInDeck.currentCardsNumber === 18){
-			// populate deck 
-			deck = this.cardsLibrary;
-		} 
 		if (this.cardsInDeck.currentCardsNumber >= 6){
 			// give three cards to each player
 			// assigning variables to everything to make this easier to understand
@@ -85,22 +96,29 @@ const game = {
 			for (i = 0; i < dealAmount; i++){
 				// update each cards array
 				playerHand.push(deck[i]);
-				computerHand.push(deck[i]);
-				this.cardsInDeck.currentCardsNumber -= 2;
-				// display cards for each player
 				// update cardsInDeck
-				deck.shift(2 * i)
-				// point to playHand method when finished
+				deck.shift(i);
+				this.cardsInDeck.currentCardsNumber -= 1;
 			}
-			// console.log()
-			return (this.playHand(playerHand[0], computerHand[0]));
+			for (i = 0; i < dealAmount; i++){
+				computerHand.push(deck[i]);
+				deck.shift(i);
+				this.cardsInDeck.currentCardsNumber -= 1;
+			}
+			// display cards for each player
+
+			// point to playHand method when finished
+			return (this.playHand());
 		} else {
 			// this should happen automatically if 0 cards are left
 			return this.gameOver();
 		}
 	},
-	roundOver(playerPoints, computerPoints){
+	roundOver(){
 		// grab each player's points for the round
+		if (this.cardsInDeck.deck.length === 0) {
+			return (this.gameOver());
+		}
 		playerPoints = this.playerCurrentRoundPoints;
 		computerPoints = this.computerCurrentRoundPoints;
 		// add 1 to rounds won if they earned more points that round.
@@ -118,4 +136,4 @@ const game = {
 		return this.deal();
 	}
 }
-console.log(game.cardsLibrary);
+console.log(game.cardsInDeck.deck);
