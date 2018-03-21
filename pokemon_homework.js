@@ -42,6 +42,10 @@ class Game {
 		this.cardsRemaining = pokeCards;
 	}
 	gameRound(){
+			let player1RPs = 0;
+
+			let player2RPs = 0;
+
 		for(let i = 0; i < 3; i++){
 			// grab damage value of player 1's card
 			let player1Damage = this.player1.cardsDealt[i].damage;
@@ -50,16 +54,30 @@ class Game {
 			let player2Damage = this.player2.cardsDealt[i].damage;
 			//console.log(player2Damage);
 			//compare and award points accordingly
+			
+			//compare cards/assign points
 			if(player1Damage > player2Damage){
-				console.log("Player 1 Wins Point.");
+				console.log(this.player1.cardsDealt[i].name + " beats " + this.player2.cardsDealt[i].name + ". " + this.player1.name + " Wins.");
 				this.player1.points += 1;
+				player1RPs +=1;
 			} else if (player2Damage > player1Damage){
-				console.log("Player 2 Wins Point.");
+				console.log(this.player2.cardsDealt[i].name + " beats " + this.player1.cardsDealt[i].name + ". " + this.player2.name + " Wins.");				
 				this.player2.points += 1;
+				player2RPs +=1;
 			} else {
-				console.log("Tie. No Points Awarded.");
+				console.log("Tie. No points awarded this hand.");
 			}
-		} 	//clear player1 hand
+		} 	
+			if(player1RPs > player2RPs){
+				console.log(this.player1.name +  " wins Round.");
+				this.player1.roundsWon +=1;
+			} else if (player2RPs > player1RPs){
+				console.log(this.player2.name + " wins Round.");
+				this.player2.roundsWon +=1;
+			} else {
+				console.log("Tie. No points awarded this round.")
+			}
+			//clear player1 hand
 			this.player1.cardsDealt = [];
 			//clear player 2 hand
 			this.player2.cardsDealt = [];
