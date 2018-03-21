@@ -146,6 +146,10 @@ class Computer {
 
 
 // 8. determine the winner of each play
+//AG NOTES: Logic:
+			// if computer damage is > player damage, add point to computer
+			// else if player damage is > than computer, add point to computer
+			// else 0 points (if damage is equal)
 
 // 9. stop once there are no cards left or not enough to deal 3 to each the player and computer
 
