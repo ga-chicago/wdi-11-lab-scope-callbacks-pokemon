@@ -16,9 +16,6 @@ for(let i = 0; i < tagMap.length; i++){
 }
 
 // 3. Loop over the filtered array and...
-
 // 4. Output each array item's key and value
 
-// Hint: Remember, this is an array of objects. This means you'll need to use both array methods and 
-// object concepts to complete this. Also remember that some methods return new copies of arrays instead 
-// of changing their values in place
+//AG NOTE ---> I think my above code block completes 3 & 4 also?
