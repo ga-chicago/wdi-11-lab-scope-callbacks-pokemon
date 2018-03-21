@@ -78,23 +78,23 @@ let cardsLibrary = [{
 //GAME OBJECT
 
 
-// class Game = {
-// 	// 3. know how many cards are left to be played overall
-// 	availableCardsRemaining () {
-// 		for(element of this.availableCards) {
-// 			console.log(availableCards.length)
-// 		}
-// 	}
-// 	points() {
+class Game = {
+	// 3. know how many cards are left to be played overall
+	availableCardsRemaining () {
+		for(element of this.availableCards) {
+			console.log(availableCards.length)
+		}
+	}
+	points() {
 
-// 	}
-// 	cardstoPlay () {
+	}
+	cardstoPlay () {
 
-// 	}
-// 	roundsWon () {
+	}
+	roundsWon () {
 
-// 	}
-// }
+	}
+}
 
 
 
@@ -103,25 +103,29 @@ let cardsLibrary = [{
 // 2. know what cards have been played
 
 // 4. track points for both the player and the computer Note: Points are determine by the following: If the player's card beats the computer's card, the player gets one point (and vice versa). If there is a tie, no one gets a point.
-		//earn one point if player damage > then computer card
-		// if player damage === computer damage no points
-		//if / else statement
 
-// let cardsInPlay = [];
-// let checkForMatch = function () {
-// if (cardsInPlay[0] === cardsInPlay[1]) {
-//     alert("You found a match!");
-//   } else {
-//     alert("Sorry, try again.");
-//   }
-// };
+//AG NOTES: Logic:
+			//earn one point if player damage > then computer card
+			// if player damage === computer damage no points
+			//if / else statement
 
 // 5. track rounds
+//AG NOTES: Logic:
+			// count after the cards have been played
+			// begin new round after 3 cards have been played
+			// "game over" when no more cards can be played
 
 // 6. track number of rounds won for both player and computer
+//AG NOTES: Logic:
+			// calculate total score after three cards played
+			// assign that round as a win to the player if score is higher than computer
+			// assign that round as a win to the computer if score is higher than player
 
 // 7. automatically deal 3 cards from the library to the player and 3 cards to the computer each round
-			//each class should receive cards from array into their cards function
+//AG NOTES: Logic:
+			// loop through the cardsLibrary array
+			// randomly pull 3 indexs (cards) and assign to computer hand; these indexes should be completely removed from cardsLibrary array
+			//randomly pull 3 indexes (cards) and assign to player hand; these indexes should be completely removed from cardsLibrary array
 class Player{
 	constructor() {
 		cardsDealt: [];
@@ -136,7 +140,7 @@ class Computer {
 		for(let i = 0; i < 3; i++){
 			let cards = cardsLibrary[Math.floor(Math.random()*cardsLibrary.length)];
 		}
-		console.log(this.cardsDealt.push(cards));	
+		console.log(this.constructor.cardsDealt.push(cards));	
 	}
 }
 
@@ -163,13 +167,7 @@ class Player = {
 		this.roundsWon = 0;
 		this.cardsPlayed = [];
 	}
-	points() {
-
-	}
 	cardsDealt () {
-
-	}
-	roundsWon () {
 
 	}
 }
