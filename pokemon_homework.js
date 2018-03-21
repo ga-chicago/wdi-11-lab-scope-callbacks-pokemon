@@ -33,6 +33,39 @@ class Player {
 const marie = new Player ('Marie');
 const computer = new Player ('Computer');
 
+class Game {
+	constructor(player1, player2){
+		this.gameRounds = 0;
+		this.player1 = player1;
+		this.player2 = player2;
+		this.cardsPlayed = cardsPlayed;
+		this.cardsRemaining = pokeCards;
+	}
+	gameRound(){
+		for(let i = 0; i < 3; i++){
+			let player1Damage = this.player1.cardsDealt[i].damage;
+			//console.log(player1Damage);
+			let player2Damage = this.player2.cardsDealt[i].damage;
+			//console.log(player2Damage);
+			if(player1Damage > player2Damage){
+				console.log("Player 1 Wins Point.");
+				this.player1.points += 1;
+			} else if (player2Damage > player1Damage){
+				console.log("Player 2 Wins Point.");
+				this.player2.points += 1;
+			} else {
+				console.log("Tie. No Points Awarded.");
+			}
+		} 
+			this.player1.cardsDealt = [];
+			this.player2.cardsDealt = [];
+			this.gameRounds += 1;
+	}	
+
+}
+
+const game1 = new Game(marie, computer);
+
 //Create Game
 
 //What cards have been played?
