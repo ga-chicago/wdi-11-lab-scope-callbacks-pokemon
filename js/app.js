@@ -164,40 +164,37 @@ player2.dealCards();
 // 1 : {name: "Charmander", damage: 60, cardImage: "images/charmander.jpg"}
 // 2: {name: "Meowth", damage: 60, cardImage: "images/meowth.jpg"}
 
+//then, each player needs to decide which card to play?
+//player1 chooses card 1, Nidoran-female damage 60
+player1.cardsDealt[1];
+//--> {name: "Nidoran - female", damage: 60, cardImage: "images/"}
+//computer chooses Meowth, with damage 60
+player2.cardsDealt[2];
+//-->
 
 
+//create Game class
+class Game {
+  //pass players into the game
+  constructor(player1, player2, gameRound) {
+    this.gameRound = 0;
+    this.cardsPlayed = cardsPlayed;
+    this.cardsRemaining = pokeCards;
+    this.cardsDealt = [];
+  }
+// write loop that logs larger damage number as winner of that round  }
+//gameRound() {
+for(let i = 0; i < 3; i++) {
+  const p1Move = player1.cardsDealt[i];
+  const damage = player1.cardsDealt[i].damage;
+  console.log(player1 + " played" + p1Move + " and it's super effective! Player One logs " + damage + " .");
+}
 
-
-// const cardsYetToPlay = () => {
-//
-//   }
-//
-// const playerPoints = () => {
-//
-//   }
-//
-// const computerPoints = () => {
-//
-//   }
-//
-// const numOfRounds = () => {
-//
-//   }
-//
-// const dealCards = () => {
-//   //if no cards left, message null (no cards left!)
-//   }
-//
-// const determineWinner = () => {
-//
-//   }
-// }
 //
 //
 //
-//
-// var createBoard = function () {
-//   for (var i = 0; i  < cards.length; i++) {
+// const createBoard = function () {
+//   for (var i = 0; i  < pokeCards.length; i++) {
 //     var cardElement = document.createElement('img');
 //     cardElement.setAttribute('src', 'images/pokemon-card.jpg')
 //     cardElement.setAttribute('data-id', i);
