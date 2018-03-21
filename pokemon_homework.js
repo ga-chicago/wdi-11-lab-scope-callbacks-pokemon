@@ -43,10 +43,13 @@ class Game {
 	}
 	gameRound(){
 		for(let i = 0; i < 3; i++){
+			// grab damage value of player 1's card
 			let player1Damage = this.player1.cardsDealt[i].damage;
 			//console.log(player1Damage);
+			//grab damage value of player 2's card
 			let player2Damage = this.player2.cardsDealt[i].damage;
 			//console.log(player2Damage);
+			//compare and award points accordingly
 			if(player1Damage > player2Damage){
 				console.log("Player 1 Wins Point.");
 				this.player1.points += 1;
@@ -56,9 +59,11 @@ class Game {
 			} else {
 				console.log("Tie. No Points Awarded.");
 			}
-		} 
+		} 	//clear player1 hand
 			this.player1.cardsDealt = [];
+			//clear player 2 hand
 			this.player2.cardsDealt = [];
+			//add to the rounds
 			this.gameRounds += 1;
 	}	
 
