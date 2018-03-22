@@ -39,13 +39,41 @@ const library = [{name: "Bulbasaur", damage:60},
 const game = {
 	cards: [{name: "Bulbasaur", damage:60}, {name: "Caterpie", damage:40},{name: "Charmander", damage:60},{name: "Clefairy", damage:50},{name: "Jigglypuff", damage:60},{name: "Mankey", damage:30},{name: "Meowth", damage:60},{name: "Nidoran - female", damage:60},{name: "Nidoran - male", damage:50},{name: "Oddish", damage:40},{name: "Pidgey", damage:50},{name: "Pikachu", damage:50},{name: "Poliwag", damage:50},{name: "Psyduck", damage:60},{name: "Rattata", damage:30}, {name: "Squirtle", damage:60}, {name: "Vulpix", damage:50}, {name: "Weedle", damage:40}],
 	playedCards: [],
+	compPoints: 0,
+	currentRound: 0,
+	compRoundsWon: 0,
+	compHand: [],
+	compScore: 0,
+	comPickCard(){
+		Math.random()
+	},
 	cardsLeft(){
 		return this.cards.length;
+	},
+	deal(){
+		// give 3 cards to player and 3 cards to computer
+		// this.cards[]
+
+		// get 1 card
+		const rand = Math.floor((this.cards.length - 1) * Math.random())
+		const card = this.cards.splice(rand, 1)
+		player.hand.push(card[0])
+
+
+		//push
 	}
+
 
 }
 
 const player = {
+	points: 0,
+	roundsWon: 0,
+	hand: [],
+	score: 0,
+	pickCard(){
+
+	}
 
 }
 
