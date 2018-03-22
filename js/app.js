@@ -1,10 +1,7 @@
 const game = {
 	// original object of cards to reference
 	cardsLibrary: {cards},
-	cardsUsed: {
-	// use this array to track all the cards that have been used
-		cards: []
-	},
+	cardsUsed: [],
 	cardsInDeck: {
 		// deck starts from source, then depletes every hand
 		deck: cards,
@@ -34,15 +31,16 @@ const game = {
 			return this.deal();
 		} else {
 			// if player responds with anything other than yes or no
-			prompt ("Please answer 'Yes' or 'No'");
+			alert ("Please answer 'Yes' or 'No'");
 			return this.startGame();
 		}
 	},
 	deal(){
 		let deck = this.cardsInDeck.deck;
-		if (this.cardsInDeck.currentCardsNumber < 6) {
+		let deckNum = this.cardsInDeck.currentCardsNumber;
+		if (deckNum < 6) {
 			return this.gameOver();
-		} else if (this.cardsInDeck.currentCardsNumber >= 6){
+		} else if (deckNum >= 6){
 			// give three cards to each player
 			// assigning variables to everything to make this easier to understand
 			let dealAmount = 3;
@@ -51,53 +49,64 @@ const game = {
 			for (i = 0; i < dealAmount; i++){
 				// update each cards array
 				playerHand.push(deck[i]);
-				// update cardsInDeck
+				// update cardsUsed array and deck
+				this.cardsUsed.push(deck[i]);
 				deck.shift(i);
-				this.cardsInDeck.currentCardsNumber -= 1;
+				deckNum -= 1;
 			}
 			for (i = 2; i > -1; i--){
 				// have to deal to computer in reverse so the last card at index 0 gets distributed properly
 				computerHand.push(deck[i]);
+				// update cardsUsed array and deck
+				this.cardsUsed.push(deck[i]);
 				deck.shift(i);
-				this.cardsInDeck.currentCardsNumber -= 1;
+				deckNum -= 1;
 			}
 			// display cards for each player
 
 			// point to chooseCard method when finished
-			console.log(playerHand, computerHand)
 			return (this.chooseCard());
 		}
 	},
-	cardsPlayed(playerCard, computerCard){
-		// create array to store cards chosen to be played
-		// push cards chosen to array
-		this.cardsUsed.push(playerCard);
-		this.cardsUsed.push(computerCard);
-		// subtract cards played from cards remaining value, which starts at total card amount
-		this.currentCardsNumber -= 2;
-		return(playHand(playerCard, computerCard));
-	},
 	chooseCard() {
 		// let player choose card
-		// const whichCard = prompt("Which card would you like to play? Card 1, Card 2, or Card 3? You currently have " + player.displayCurrentHand());
-		// // assign answer (which card player wants to use) to a variable
-		// if (whichCard === "Card 1") {
-		// 	let cardChosen = this.playerCards.cards[0];
-		// } else if (whichCard === "Card 2") {
-		// 	let cardChosen = this.playerCards.cards[1];
-		// } else if (whichCard === "Card 3") {
-		// 	let cardChosen = this.playerCards.cards[2];
-		// } else {
-		// 	console.log("Please respond Card 1, Card 2, or Card 3.");
-		// 	return this.chooseCard();
-		// }
+		if (player.displayCurrentHand()) {
+			console.log(player.displayCurrentHand());
+		}
 		if (this.playerCards.cards.length === 0) {
 			if (this.cardsInDeck.currentCardsNumber === 0) {
 				return this.gameOver();
 			} else {
-				return this.deal();
+				return this.roundOver();
 			}
+		};
+		let cardChosen = prompt("Which card would you like to play? Card 1, Card 2, or Card 3? Cards displayed in console.");
+		// assign answer (which card player wants to use) to a variable
+		let card1 = this.playerCards.cards[0];
+		let card2 = this.playerCards.cards[1];
+		let card3 = this.playerCards.cards[2];
+		if (cardChosen === "Card 1") {
+			console.log();
+			return this.playHand(card1);
+		} else if (cardChosen === "Card 2") {
+			if (!card2) {
+				alert("Player doesn't have a 2nd card in hand.");
+				return this.chooseCard();
+			} else {
+				return this.playHand(card2);
+			}
+		} else if (cardChosen === "Card 3") {
+			if (!card3) {
+				alert("Player doesn't have a 3rd card in hand.");
+				return this.chooseCard();
+			} else {
+			return this.playHand(card3);
+			}
+		} else {
+			alert("Please respond Card 1, Card 2, or Card 3.");
+			return this.chooseCard();
 		}
+		
 		// let cardChosen = this.playerCards.cards[0]
 		// use chosen card as the parameter for the playHand function
 		console.log(this.playerCards.cards, this.computerCards.cards);
@@ -113,9 +122,6 @@ const game = {
 		// console.log(this.cardsInDeck.deck);
 		// playHand needs to be called somewhere, as a button maybe?
 		// set condition in case there are 0 cards left
-		if (this.computerCards.cards.length === 0) {
-			return(this.roundOver());
-		}
 		// set conditions for each player to score
 		if (playerCard.damage > computerCard.damage){
 			this.playerScore += 1;
@@ -150,34 +156,51 @@ const game = {
 		// if 0 cards left, game over.
 			// game over
 			// display both player's total points and rounds won
-			if (this.playerScore > this.computerScore) {
-				console.log((this.playerName + " wins with " + this.playerScore + " points and " + this.playerRoundsWon + " rounds won!"));
-			} else if (this.computerScore > this.playerScore) {
-				console.log (this.computerName + " wins with " + this.computerScore + " points and " + this.computerRoundsWon + " rounds won!");
+			if (this.playerRoundsWon === this.computerRoundsWon) {
+				if (this.playerScore > this.computerScore) {
+					return (console.log (this.playerName + " wins with " + this.playerScore + " points and " + this.playerRoundsWon + " rounds won!"));
+				} else if (this.computerScore > this.playerScore) {
+					return (console.log (this.computerName + " wins with " + this.computerScore + " points and " + this.computerRoundsWon + " rounds won!"));
+				} else {
+					return (console.log ("Tie game!"));
+				}
 			} else {
-				console.log ("Tie game!")
+				if (this.playerRoundsWon > this.computerRoundsWon) {
+					return (console.log (this.playerName + " wins with " + this.playerScore + " points and " + this.playerRoundsWon + " rounds won!"));
+				} else if (this.computerRoundsWon > this.playerRoundsWon) {
+					return (console.log (this.computerName + " wins with " + this.computerScore + " points and " + this.computerRoundsWon + " rounds won!"));
+				} else {
+					return (console.log ("Tie game!"));
+				}
 			} 
 	},
 	roundOver(){
 		// grab each player's points for the round
-		if (this.cardsInDeck.deck.length === 0) {
-			return (this.gameOver());
-		}
 		playerPoints = this.playerCurrentRoundPoints;
 		computerPoints = this.computerCurrentRoundPoints;
-		// add 1 to rounds won if they earned more points that round.
-		if (playerPoints > computerPoints) {
-			this.playerRoundsWon += 1;
-		} else if (computerPoints > playerPoints) {
-			this.computerRoundsWon += 1;
+		if (this.cardsInDeck.deck.length === 0) {
+			return (this.gameOver());
 		} else {
-			console.log("Tie round. No points awarded.")
+			// add 1 to rounds won if they earned more points that round.
+			if (playerPoints > computerPoints) {
+				this.playerRoundsWon += 1;
+				console.log(this.playerName + " wins the round!");
+				playerPoints = 0;
+				computerPoints = 0;
+				return this.deal();
+			} else if (computerPoints > playerPoints) {
+				this.computerRoundsWon += 1;
+				console.log(this.computerName + " wins the round!");
+				playerPoints = 0;
+				computerPoints = 0;
+				return this.deal();
+			} else {
+				console.log("Tie round. No points awarded.")
+				playerPoints = 0;
+				computerPoints = 0;
+				return this.deal();
+			}
 		}
-		// reset each player's points for the round
-		playerPoints = 0;
-		computerPoints = 0;
-		// maybe calling deal() will eventually be a button?
-		return this.deal();
 	},
 	shuffleDeck(){
 		// found a version of this on the internet. it totally works.
@@ -202,10 +225,27 @@ const player = {
 	playerRoundsWon: game.playerRoundsWon,
 	cardsPrevUsed: [],
 	displayCurrentHand () {
-		return [game.playerCards.cards[0], game.playerCards.cards[1], game.playerCards.cards[2]];
+		let playerHand = game.playerCards.cards;
+		// set conditions for amount of cards in player hand
+		if (playerHand.length === 3) {
+			let card1 = playerHand[0].name;
+			let card2 = playerHand[1].name;
+			let card3 = playerHand[2].name;
+			return ["Card 1: " + card1, "Card 2: " + card2, "Card 3: " + card3];
+		} else if (playerHand.length === 2) {
+			let card1 = playerHand[0].name;
+			let card2 = playerHand[1].name;
+			return ["Card 1: " + card1, "Card 2: " + card2];
+		} else if (playerHand.length === 1) {
+			let card1 = playerHand[0].name;
+			return ["Card 1: " + card1];
+		} else if (game.cardsInDeck.currentCardsNumber === 0) {
+			return game.gameOver();
+		}
 	},
 	shuffleDeck() {
 		return game.shuffleDeck();
 	}
 };
-game.startGame();
+// NEXT TO CODE:
+// display a start game button, reset button, points + round scoreboard in html
