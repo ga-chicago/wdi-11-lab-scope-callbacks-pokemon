@@ -1,3 +1,16 @@
+// IMPORTANT NOTE:
+
+
+
+
+
+
+
+// PLEASE input game.startGame(); in console to begin game sequence.
+// if I had it start when index.html loaded, the first prompt would
+// prevent the player from opening the javascript console.
+// that is, until I program a functioning start button in html
+
 const game = {
 	// original object of cards to reference
 	cardsLibrary: {cards},
