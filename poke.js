@@ -1,4 +1,4 @@
-console.log("HI")
+console.log("Pokemon Battle  in 3....2....1")
 
 
 
@@ -61,10 +61,8 @@ const game = {
         damage:40
     }],
     cardsPlayed: [],
-    playerPoints: 0,
     computerPoints: 0,
     currentRound: 0,
-    playerRoundsWon: 0,
     computerRoundsWon: 0,
     randomArr: [],
     computerHand: [],
@@ -109,8 +107,10 @@ const game = {
 
 
    		if(this.cardsPlayed[0][0].damage > this.cardsPlayed[1][0].damage){
+   			    player.playerPoints += 1
    			console.log("Player Win")
    		} else if(this.cardsPlayed[0][0].damage < this.cardsPlayed[1][0].damage){
+            this.computerPoints += 1
    			console.log("Computer Win")
    		} else {
    			console.log("Its a Tie")
@@ -130,8 +130,10 @@ const game = {
 
    		
    		if(this.cardsPlayed[2][0].damage > this.cardsPlayed[3][0].damage){
+          player.playerPoints += 1 
    			console.log("Player Win")
    		} else if(this.cardsPlayed[2][0].damage < this.cardsPlayed[3][0].damage){
+          this.computerPoints += 1
    			console.log("Computer Win")
    		} else {
    			console.log("Its a Tie")
@@ -149,17 +151,19 @@ const game = {
    		console.log(this.cardsPlayed)
    		
    		if(this.cardsPlayed[4][0].damage > this.cardsPlayed[5][0].damage){
+          player.playerPoints += 1
    			console.log("Player Win")
    		} else if(this.cardsPlayed[4][0].damage < this.cardsPlayed[5][0].damage){
+          this.computerPoints += 1
    			console.log("Computer Win")
    		} else {
    			console.log("Its a Tie")
    		}	
    	},
 
-   	roundWin() {
 
-   		
+
+
    	}
    	// dont know if I need a method but every time a winner is decided
    	// log it in the computer or player points
@@ -168,10 +172,12 @@ const game = {
 
 
     
-}
+
 
 const player = {
 	hand: [], // the players hand once the cards are dealt 
+	playerRoundsWon: 0,
+	playerPoints: 0
 	// receive (card) {
 	// 	this.hand.push(card) // Not sure I need this here // What is it doing 
 	// }
