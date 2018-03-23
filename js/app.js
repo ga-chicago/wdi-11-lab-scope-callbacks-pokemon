@@ -179,30 +179,19 @@ const thePlayer = {
 
 
 /// EXTRA CHALLENGE 
-const isEnglish = () => {
-	tagMap["Language"] = "en";
-}
 
-	// const filteredStuff = tagMap.filter(isEnglish)
-	// console.log(filteredStuff);
 
-const filteredStuff = []
+const english = [];
 
-for (row of tagMap) {
-	if (row["Language"] === "en") {
-		filteredStuff.push(row)
+for (let i = 0; i < tagMap.length; i++) {
+	if (tagMap[i]["Language"] === 'en') {
+		english.push(tagMap[i]);
 	}
-
-}
-console.log(filteredStuff);
-
-let keys, values;
-
-for (item in filteredStuff) {
-	keys = Object.keys(item)
-	values = Object.values(item)
-	
 }
 
-console.log(keys);
-console.log(values);
+for (let i = 0; i < english.length; i++) {
+	console.log(Object.entries(english[i]));
+}
+
+
+
