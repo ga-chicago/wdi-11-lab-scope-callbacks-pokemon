@@ -44,8 +44,15 @@ const game = {
 	compRoundsWon: 0,
 	compHand: [],
 	compScore: 0,
+	getRandomCard(cardArr){
+		const rand = Math.floor((cardArr.length - 1) * Math.random())
+		const card = cardArr.splice(rand, 1)
+
+		return card[0];
+	},
 	comPickCard(){
-		Math.random()
+		return this.getRandomCard(this.compHand)
+		
 	},
 	cardsLeft(){
 		return this.cards.length;
@@ -55,9 +62,20 @@ const game = {
 		// this.cards[]
 
 		// get 1 card
-		const rand = Math.floor((this.cards.length - 1) * Math.random())
-		const card = this.cards.splice(rand, 1)
-		player.hand.push(card[0])
+
+		
+		//for 3
+		for(i =0; i < 3; i++){
+			// 1 card for player
+			
+			player.hand.push(this.getRandomCard(this.cards))
+
+			//1 card for computer
+			
+			this.compHand.push(this.getRandomCard(this.cards))
+			
+		}
+			
 
 
 		//push
@@ -72,10 +90,70 @@ const player = {
 	hand: [],
 	score: 0,
 	pickCard(){
+		//create a string of the player cards
 
+		//show them their cards
+		console.log(player.hand)
+		//prompt for a card
+		const pickName = prompt("Which card would you like to use?");
+		for(let i = 0; i < player.hand.length; i++){
+			let card = player.hand[i]
+			if(pickName === card.name){
+				return card;
+			}
+
+		//figure out which card they picked
+		
+		//return the card
+		}
 	}
 
 }
+
+function startGame (){
+	const startPro = prompt("Would you like to play (yes or no)?")
+		startPro;
+		if (startPro === "yes") {
+			newRound();
+		}
+}
+
+function newRound (){
+
+
+	game.deal();
+			
+			
+	for(let i =0; i < 3; i++){
+		let cpu = game.comPickCard(); 
+
+		let mvp = player.pickCard();
+		if(cpu.damage > mvp.damage){
+			game.compPoints++;
+		}
+		else if(mvp.damage > cpu.damage) {
+			player.points++;
+		}
+
+	}
+			//
+	game.currentRound++;
+	if(player.points > game.compPoints){
+		player.roundsWon++
+	}
+	else if(player.points < game.compPoints){
+		game.compRoundsWon++
+	}
+
+	if (game.cardsLeft() >= 6) {
+		newRound();
+	}
+	else{
+		alert("Game Over");
+	}
+}
+		
+
 
 
 
