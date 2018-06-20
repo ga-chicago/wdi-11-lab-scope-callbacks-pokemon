@@ -72,7 +72,7 @@ const computerHand = {
 //deals cards to both the player and the computer
 const dealCard = (numberOfCards) => {
 	if(numberOfCards * 2 > cardsLeftToPlay.length){
-		console.error("There aren't enough cards to deal out");
+		//console.error("There aren't enough cards to deal out");
 		return
 	}
 
@@ -96,7 +96,7 @@ const randomNumber = (maxNumber) => {
 const battle = () => {
 	//checking to ensure both players have at least 1 card
 	if(playerHand.currentHand.length < 1 || computerHand.currentHand.length < 1) {
-		console.log('Not enough cards in hand to battle');
+		//console.log('Not enough cards in hand to battle');
 		return
 	}
 
@@ -115,22 +115,37 @@ const battle = () => {
 	//use playcard method to move card to "played deck"
 	computerHand.playCard(computerCard+1);
 
+	//making the current player card the last item in the played array
 	let currentPlayerCard = playerHand.cardsPlayed[playerHand.cardsPlayed.length-1];
 
+	//making the current computer card the last item in the played array
 	let currentComputerCard = computerHand.cardsPlayed[computerHand.cardsPlayed.length-1];
 
-	//compare attach of the last two played card decks
-	
+	//compare attack of the last two played card decks
+	if(currentPlayerCard.damage > currentComputerCard.damage){
+		//log score for Player
+		console.log(`The Player Won!`);
+		playerHand.wonHand();
+		dealCard(1);
+		return
+	} else if (currentPlayerCard.damage < currentComputerCard.damage) {
+		//log score for Computer
+		console.log(`The Computer Won!`);
+		computerHand.wonHand();
+		dealCard(1);
+		return
+	} else {
+		console.log(`Tie! Play another hand for tiebreaker.`)
+		dealCard(1);
+		battle();
+	}
 
 }
 
 
 //intial game start condition. Each player starts with 3 cards
 dealCard(3);
-for(let i = 0; i < 3; i++){
 
-
-}
 
 
 
@@ -138,15 +153,29 @@ for(let i = 0; i < 3; i++){
 //The game will continue to loop through the steps until the end condition which is when there aren't enough cards left to deal to both players
 
 //Last Round will be true until there are less than 1 cards left in the deck
-/*while(lastRound){
 
+let notLastRound = true;
+let count = 0; 
+while(notLastRound){
+if(count > 15) {
+	break;
+}
+battle();
 
-
-
-
-roundsPlayed++;
+if(cardsLeftToPlay < 2 && playerHand.currentHand.length < 1){
+	notLastRound = false;
 }
 
-*/
+roundsPlayed++;
+count++;
+}
+
+if (playerHand.roundsWon > computerHand.roundsWon) {
+	console.log(`The Player Won, ${playerHand.roundsWon} vs. ${computerHand.roundsWon}`);
+} else {
+	console.log(`The Computer Won, ${computerHand.roundsWon} vs. ${playerHand.roundsWon}`);
+}
+
+
 
 
