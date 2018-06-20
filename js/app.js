@@ -92,13 +92,36 @@ const randomNumber = (maxNumber) => {
   return Math.floor(Math.random() * Math.floor(maxNumber));
 }
 
-
+//battle functio to be called each round
 const battle = () => {
-	const userInput = window.prompt(`Which card do you want to play? (between 1 and ${playerHand.currentHand.length})`); 
+	//checking to ensure both players have at least 1 card
+	if(playerHand.currentHand.length < 1 || computerHand.currentHand.length < 1) {
+		console.log('Not enough cards in hand to battle');
+		return
+	}
+
+	//Asking the user to play a card. Prompts the available range
+	let userInput = window.prompt(`Which card do you want to play? (between 1 and ${playerHand.currentHand.length})`); 
+	//checks that the user input is valid
+	while(userInput > playerHand.currentHand.length || userInput < 1){
+		userInput = window.prompt(`Error! Please enter a valid number. (between 1 and ${playerHand.currentHand.length})`)
+	}
+	//use playcard method to move card to "played deck"
+	playerHand.playCard(userInput);
+
+	//use random number to play a computer card
 	const computerCard = randomNumber(computerHand.currentHand.length);
 
+	//use playcard method to move card to "played deck"
+	computerHand.playCard(computerCard+1);
+
+	let currentPlayerCard = playerHand.cardsPlayed[playerHand.cardsPlayed.length-1];
+
+	let currentComputerCard = computerHand.cardsPlayed[computerHand.cardsPlayed.length-1];
+
+	//compare attach of the last two played card decks
 	
-	
+
 }
 
 

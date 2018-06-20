@@ -39,14 +39,14 @@ NOTE: Think about the best datatype (number, string, array, object) for each par
 
 The game should be able to:
 
-1. keep a library of all the Pokemon cards that can be played (see the array in the "The Cards" section)
-2. know what cards have been played
-3. know how many cards are left to be played overall
-4. track points for both the player and the computer
+#1. keep a library of all the Pokemon cards that can be played (see the array in the "The Cards" section)  
+#2. know what cards have been played
+#3. know how many cards are left to be played overall
+#4. track points for both the player and the computer
   Note: Points are determine by the following: If the player's card beats the computer's card, the player gets one point (and vice versa). If there is a tie, no one gets a point.
-5. track rounds
-6. track number of rounds won for both player and computer
-7. automatically deal 3 cards from the library to the player and 3 cards to the computer each round
+#5. track rounds
+#6. track number of rounds won for both player and computer
+#7. automatically deal 3 cards from the library to the player and 3 cards to the computer each round
 8. determine the winner of each play
 9. stop once there are no cards left or not enough to deal 3 to each the player and computer
 
