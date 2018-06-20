@@ -93,6 +93,21 @@ const randomNumber = (maxNumber) => {
 }
 
 
+const battle = () => {
+	const userInput = window.prompt(`Which card do you want to play? (between 1 and ${playerHand.currentHand.length})`); 
+	const computerCard = randomNumber(computerHand.currentHand.length);
+
+	
+	
+}
+
+
+//intial game start condition. Each player starts with 3 cards
+dealCard(3);
+for(let i = 0; i < 3; i++){
+
+
+}
 
 
 
