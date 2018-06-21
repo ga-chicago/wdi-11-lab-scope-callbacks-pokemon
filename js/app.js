@@ -142,33 +142,35 @@ const battle = () => {
 
 }
 
-
 //intial game start condition. Each player starts with 3 cards
 dealCard(3);
-
-
-
-
-//This will be the container for the game once it gets automated
-//The game will continue to loop through the steps until the end condition which is when there aren't enough cards left to deal to both players
 
 //Last Round will be true until there are less than 1 cards left in the deck
 
 let notLastRound = true;
 let count = 0; 
+
+//This will be the container for the game once it gets automated
+//The game will continue to loop through the steps until the end condition which is when there aren't enough cards left to deal to both players
+
+//game continues playing until notLastRound becomes false
 while(notLastRound){
-if(count > 15) {
+//another break condition that makes sure the while loop doesn't loop more than 15 times
+	if(count > 15) {
 	break;
-}
-battle();
+	}
 
-if(cardsLeftToPlay < 2 && playerHand.currentHand.length < 1){
-	notLastRound = false;
+	battle();
+
+	if(cardsLeftToPlay < 2 && playerHand.currentHand.length < 1){
+		notLastRound = false;
+	}	
+
+	roundsPlayed++;
+	count++;
 }
 
-roundsPlayed++;
-count++;
-}
+
 
 if (playerHand.roundsWon > computerHand.roundsWon) {
 	console.log(`The Player Won, ${playerHand.roundsWon} vs. ${computerHand.roundsWon}`);
