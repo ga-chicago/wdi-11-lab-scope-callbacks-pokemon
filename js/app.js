@@ -99,9 +99,17 @@ const battle = () => {
 		//console.log('Not enough cards in hand to battle');
 		return
 	}
+	let userInput;
 
 	//Asking the user to play a card. Prompts the available range
-	let userInput = window.prompt(`Which card do you want to play? (between 1 and ${playerHand.currentHand.length})`); 
+	if(playerHand.currentHand.length === 3){
+		userInput = window.prompt(`Which card do you want to play? (between 1 and ${playerHand.currentHand.length})\nOption 1: ${playerHand.currentHand[0].name} with damage of: ${playerHand.currentHand[0].damage}\nOption 2: ${playerHand.currentHand[1].name} with damage of: ${playerHand.currentHand[1].damage}\nOption 3: ${playerHand.currentHand[2].name} with damage of: ${playerHand.currentHand[2].damage}`); 
+	} else if(playerHand.currentHand.length === 2){
+		userInput = window.prompt(`Which card do you want to play? (between 1 and ${playerHand.currentHand.length})\nOption 1: ${playerHand.currentHand[0].name} with damage of: ${playerHand.currentHand[0].damage}\nOption 2: ${playerHand.currentHand[1].name} with damage of: ${playerHand.currentHand[1].damage}`); 
+	} else if(playerHand.currentHand.length === 1){
+		userInput = window.prompt(`Which card do you want to play? (between 1 and ${playerHand.currentHand.length})\nOption 1: ${playerHand.currentHand[0].name} with damage of: ${playerHand.currentHand[0].damage}`); 
+	}
+
 	//checks that the user input is valid
 	while(userInput > playerHand.currentHand.length || userInput < 1){
 		userInput = window.prompt(`Error! Please enter a valid number. (between 1 and ${playerHand.currentHand.length})`)
@@ -124,18 +132,18 @@ const battle = () => {
 	//compare attack of the last two played card decks
 	if(currentPlayerCard.damage > currentComputerCard.damage){
 		//log score for Player
-		console.log(`The Player Won!`);
+		console.log(`The Player Won! Player: ${currentPlayerCard.damage} vs Computer: ${currentComputerCard.damage}.`);
 		playerHand.wonHand();
 		dealCard(1);
 		return
 	} else if (currentPlayerCard.damage < currentComputerCard.damage) {
 		//log score for Computer
-		console.log(`The Computer Won!`);
+		console.log(`The Computer Won! Player: ${currentPlayerCard.damage} vs Computer: ${currentComputerCard.damage}.`);
 		computerHand.wonHand();
 		dealCard(1);
 		return
 	} else {
-		console.log(`Tie! Play another hand for tiebreaker.`)
+		console.log(`Tie! Play another hand for tiebreaker. Player: ${currentPlayerCard.damage} vs Computer: ${currentComputerCard.damage}.`)
 		dealCard(1);
 		battle();
 	}
