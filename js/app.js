@@ -132,18 +132,18 @@ const battle = () => {
 	//compare attack of the last two played card decks
 	if(currentPlayerCard.damage > currentComputerCard.damage){
 		//log score for Player
-		console.log(`The Player Won! Player: ${currentPlayerCard.damage} vs Computer: ${currentComputerCard.damage}.`);
 		playerHand.wonHand();
+		console.log(`%cThe Player Won! Player: ${currentPlayerCard.damage} vs Computer: ${currentComputerCard.damage}.\nCurrent score:\nPlayer: ${playerHand.roundsWon}\nComputer: ${computerHand.roundsWon}`, 'color: green');
 		dealCard(1);
 		return
 	} else if (currentPlayerCard.damage < currentComputerCard.damage) {
 		//log score for Computer
-		console.log(`The Computer Won! Player: ${currentPlayerCard.damage} vs Computer: ${currentComputerCard.damage}.`);
 		computerHand.wonHand();
+		console.log(`%cThe Computer Won! Player: ${currentPlayerCard.damage} vs Computer: ${currentComputerCard.damage}.\nCurrent score:\nPlayer: ${playerHand.roundsWon}\nComputer: ${computerHand.roundsWon}`, 'color: red');
 		dealCard(1);
 		return
 	} else {
-		console.log(`Tie! Play another hand for tiebreaker. Player: ${currentPlayerCard.damage} vs Computer: ${currentComputerCard.damage}.`)
+		console.log(`Tie! Play another hand for tiebreaker.\nPlayer: ${currentPlayerCard.damage} vs Computer: ${currentComputerCard.damage}.`)
 		dealCard(1);
 		battle();
 	}
